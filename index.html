@@ -52,16 +52,6 @@ input {
   margin-bottom: 15px;
 }
 
-.ejemplo {
-  font-size: 12px;
-  color: #9aa4ad;
-  margin-top: 6px;
-  margin-bottom: 20px;
-  padding-left: 2px;
-  font-style: italic;
-  letter-spacing: 0.3px;
-}
-
 button {
   width: 100%;
   padding: 12px;
@@ -95,8 +85,8 @@ button:hover {
   text-align: center;
   font-weight: 500;
   color: #444;
+  margin-top: 15px;
 }
-
 .footer {
   text-align: center;
   margin-top: auto;
@@ -105,13 +95,6 @@ button:hover {
   padding: 20px;
   background: #203a43;
   width: 100%;
-  white-space: nowrap;
-}
-
-.footer svg {
-  height: 18px;
-  vertical-align: middle;
-  margin-right: 5px;
 }
 </style>
 </head>
@@ -122,10 +105,7 @@ button:hover {
   <div class="hero-image"></div>
   <h2>Consulta de Casos Dentales</h2>
 
-  <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
-  <div class="ejemplo">
-    Ejemplo: Maria Lopez 1234 (sin tildes y con espacio)
-  </div>
+  <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico EXACTAMENTE como fue registrado">
 
   <button onclick="buscarCasos()">Consultar</button>
 
@@ -133,12 +113,7 @@ button:hover {
 </div>
 
 <footer class="footer">
-<p>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<path fill="white" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 96c79.5 0 144 64.5 144 144s-64.5 144-144 144-144-64.5-144-144 64.5-144 144-144zm0 48c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z"/>
-</svg>
 Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Morales
-</p>
 </footer>
 
 <script>
@@ -152,11 +127,12 @@ function formatearFecha(fecha) {
 }
 
 async function buscarCasos() {
-  const doctor = document.getElementById("doctorInput").value.trim();
+
+  const doctorInput = document.getElementById("doctorInput").value.trim();
   const resultadosDiv = document.getElementById("resultados");
 
-  if (doctor === "") {
-    resultadosDiv.innerHTML = "<div class='mensaje'>Debe ingresar su nombre completo.</div>";
+  if (doctorInput === "") {
+    resultadosDiv.innerHTML = "<div class='mensaje'>Ingrese datos correctamente.</div>";
     return;
   }
 
@@ -164,24 +140,32 @@ async function buscarCasos() {
 
   try {
 
-    const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctor)}`);
+    const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
     const data = await response.json();
 
-    if (!data || data.length === 0) {
-      resultadosDiv.innerHTML = "<div class='mensaje'>No se encontraron casos.</div>";
+    // FILTRADO EXACTO EN FRONTEND (extra seguridad)
+    const coincidenciasExactas = data.filter(item => 
+      item.doctor === doctorInput
+    );
+
+    if (!coincidenciasExactas || coincidenciasExactas.length === 0) {
+      resultadosDiv.innerHTML = `
+        <div class='mensaje'>
+          Ingrese datos correctamente.<br><br>
+          Si no posee usuario, solicitar acceso al correo:<br>
+          <strong>info@inveasyble.com</strong>
+        </div>
+      `;
       return;
     }
 
     let html = "";
 
-    data.forEach(item => {
+    coincidenciasExactas.forEach(item => {
       html += `
       <div class="caso">
         <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
-        <div><span class="label">Doctor:</span> ${item.doctor || ""}</div>
         <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-        <div><span class="label">Arco Superior:</span> ${item.arcoSuperior || ""}</div>
-        <div><span class="label">Arco Inferior:</span> ${item.arcoInferior || ""}</div>
         <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
         <div><span class="label">Plan:</span> ${item.planes || ""}</div>
         <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
@@ -192,7 +176,14 @@ async function buscarCasos() {
     resultadosDiv.innerHTML = html;
 
   } catch (error) {
-    resultadosDiv.innerHTML = "<div class='mensaje'>Error al conectar con el servidor.</div>";
+
+    resultadosDiv.innerHTML = `
+      <div class='mensaje'>
+        Error al conectar con el servidor.<br>
+        Intente nuevamente o contacte a <strong>info@inveasyble.com</strong>
+      </div>
+    `;
+
     console.error(error);
   }
 }
