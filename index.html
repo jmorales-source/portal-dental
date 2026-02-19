@@ -2,10 +2,10 @@
 const apiURL = "https://script.google.com/macros/s/AKfycbxqV5vyHN1tQlcTMcFcJ_4CYYW3BJI1kxUP_wRFKHmtkWW2t1h68uvaj91NhROKYQiebw/exec";
 
 async function buscarCasos() {
-    const doctor = document.getElementById("doctorInput").value.trim();
+    const doctorInput = document.getElementById("doctorInput").value.trim();
     const resultadosDiv = document.getElementById("resultados");
 
-    if (doctor === "") {
+    if (doctorInput === "") {
         resultadosDiv.innerHTML = "<div class='mensaje'>Debe ingresar su nombre completo.</div>";
         return;
     }
@@ -13,11 +13,13 @@ async function buscarCasos() {
     resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
 
     try {
-        const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctor)}`);
+        const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
         const data = await response.json();
 
+        console.log("DATA RECIBIDA:", data);
+
         if (!data || data.length === 0) {
-            resultadosDiv.innerHTML = "<div class='mensaje'>No se encontraron casos para ese nombre exacto.</div>";
+            resultadosDiv.innerHTML = "<div class='mensaje'>No se encontraron casos.</div>";
             return;
         }
 
@@ -25,25 +27,16 @@ async function buscarCasos() {
 
         data.forEach(item => {
 
-            const paciente = item["Paciente"] || "";
-            const doctorNombre = item["Doctor"] || "";
-            const fechaEntrega = item["Fecha de entrega"] || "";
-            const arcoSuperior = item["Arco Superior"] || "";
-            const arcoInferior = item["Arco Inferior"] || "";
-            const cantidadAlineadores = item["Cantidad de alineadores U/L"] || "";
-            const planes = item["Planes"] || "";
-            const estatus = item["Estatus del caso"] || "";
-
             html += `
                 <div class="caso">
-                    <div><span class="label">Paciente:</span> ${paciente}</div>
-                    <div><span class="label">Doctor:</span> ${doctorNombre}</div>
-                    <div><span class="label">Fecha de entrega:</span> ${fechaEntrega}</div>
-                    <div><span class="label">Arco Superior:</span> ${arcoSuperior}</div>
-                    <div><span class="label">Arco Inferior:</span> ${arcoInferior}</div>
-                    <div><span class="label">Cantidad de alineadores U/L:</span> ${cantidadAlineadores}</div>
-                    <div><span class="label">Planes:</span> ${planes}</div>
-                    <div><span class="label">Estatus del caso:</span> ${estatus}</div>
+                    <div><span class="label">Paciente:</span> ${item.paciente ?? ""}</div>
+                    <div><span class="label">Doctor:</span> ${item.doctor ?? ""}</div>
+                    <div><span class="label">Fecha de entrega:</span> ${item.fechaEntrega ?? ""}</div>
+                    <div><span class="label">Arco Superior:</span> ${item.arcoSuperior ?? ""}</div>
+                    <div><span class="label">Arco Inferior:</span> ${item.arcoInferior ?? ""}</div>
+                    <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores ?? ""}</div>
+                    <div><span class="label">Planes:</span> ${item.planes ?? ""}</div>
+                    <div><span class="label">Estatus del caso:</span> ${item.estatus ?? ""}</div>
                 </div>
             `;
         });
