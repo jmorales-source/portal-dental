@@ -7,92 +7,111 @@
 
 <style>
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-    background: #ffffff;
-    width: 95%;
-    max-width: 620px;
-    padding: 35px;
-    border-radius: 18px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-    margin-top: 50px;
+  background: #ffffff;
+  width: 95%;
+  max-width: 620px;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  margin-top: 50px;
 }
 
 .hero-image {
-    width: 100%;
-    height: 180px;
-    border-radius: 16px;
-    margin-bottom: 25px;
-    background-image: url('https://github.com/jmorales-source/inveasyble-website-assets/blob/main/INVEASYBLE%20(1).png?raw=true');
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  background-image: url('https://github.com/jmorales-source/inveasyble-website-assets/blob/main/INVEASYBLE%20(1).png?raw=true');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 h2 {
-    text-align: center;
-    color: #0f2027;
-    margin-bottom: 25px;
+  text-align: center;
+  color: #0f2027;
+  margin-bottom: 25px;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    margin-bottom: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  margin-bottom: 15px;
 }
 
 .ejemplo {
-    font-size: 12px;
-    color: #9aa4ad;
-    margin-top: 6px;
-    margin-bottom: 20px;
-    font-style: italic;
+  font-size: 12px;
+  color: #9aa4ad;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  padding-left: 2px;
+  font-style: italic;
+  letter-spacing: 0.3px;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: #2c5364;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #2c5364;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 button:hover {
-    background: #203a43;
+  background: #203a43;
 }
 
 .caso {
-    background: #f4f9fb;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    border-left: 5px solid #2c5364;
+  background: #f4f9fb;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 5px solid #2c5364;
 }
 
 .label {
-    font-weight: bold;
-    color: #203a43;
+  font-weight: bold;
+  color: #203a43;
 }
 
 .mensaje {
-    text-align: center;
-    font-weight: 500;
-    color: #444;
+  text-align: center;
+  font-weight: 500;
+  color: #444;
+}
+
+.footer {
+  text-align: center;
+  margin-top: auto;
+  font-size: 14px;
+  color: #fff;
+  padding: 20px;
+  background: #203a43;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.footer svg {
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
 }
 </style>
 </head>
@@ -100,86 +119,85 @@ button:hover {
 <body>
 
 <div class="container">
-    <div class="hero-image"></div>
-    <h2>Consulta de Casos Dentales</h2>
+  <div class="hero-image"></div>
+  <h2>Consulta de Casos Dentales</h2>
 
-    <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
-    <div class="ejemplo">Ejemplo: Maria Lopez 1234 (sin tildes y con espacios)</div>
+  <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
+  <div class="ejemplo">
+    Ejemplo: Maria Lopez 1234 (sin tildes y con espacio)
+  </div>
 
-    <button onclick="buscarCasos()">Consultar</button>
-    <div id="resultados"></div>
+  <button onclick="buscarCasos()">Consultar</button>
+
+  <div id="resultados"></div>
 </div>
 
+<footer class="footer">
+<p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<path fill="white" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 96c79.5 0 144 64.5 144 144s-64.5 144-144 144-144-64.5-144-144 64.5-144 144-144zm0 48c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96z"/>
+</svg>
+Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Morales
+</p>
+</footer>
+
 <script>
-const apiURL = "PEGA_AQUI_TU_NUEVA_URL";
+
+const apiURL = "https://script.google.com/macros/s/AKfycbzhtXgRQG_QB5leP_Aq3Lf7XMAE-dV4PwjkseFsT3Ee3H-pKD9zfHAux6KpCb8oKKaeyw/exec";
 
 function formatearFecha(fecha) {
-    if (!fecha) return "";
-    const f = new Date(fecha);
-    return f.toLocaleDateString("es-CR");
+  if (!fecha) return "";
+  const f = new Date(fecha);
+  return f.toLocaleDateString("es-CR");
 }
 
 async function buscarCasos() {
+  const doctor = document.getElementById("doctorInput").value.trim();
+  const resultadosDiv = document.getElementById("resultados");
 
-    const doctor = document.getElementById("doctorInput").value.trim();
-    const resultadosDiv = document.getElementById("resultados");
+  if (doctor === "") {
+    resultadosDiv.innerHTML = "<div class='mensaje'>Debe ingresar su nombre completo.</div>";
+    return;
+  }
 
-    if (doctor === "") {
-        resultadosDiv.innerHTML = "<div class='mensaje'>Debe ingresar su nombre completo.</div>";
-        return;
+  resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
+
+  try {
+
+    const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctor)}`);
+    const data = await response.json();
+
+    if (!data || data.length === 0) {
+      resultadosDiv.innerHTML = "<div class='mensaje'>No se encontraron casos.</div>";
+      return;
     }
 
-    resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
+    let html = "";
 
-    try {
-        const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctor)}`);
-        const data = await response.json();
+    data.forEach(item => {
+      html += `
+      <div class="caso">
+        <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
+        <div><span class="label">Doctor:</span> ${item.doctor || ""}</div>
+        <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
+        <div><span class="label">Arco Superior:</span> ${item.arcoSuperior || ""}</div>
+        <div><span class="label">Arco Inferior:</span> ${item.arcoInferior || ""}</div>
+        <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
+        <div><span class="label">Plan:</span> ${item.planes || ""}</div>
+        <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
+      </div>
+      `;
+    });
 
-        // 🔴 Usuario NO existe
-        if (data.error === "usuario_no_existe") {
-            resultadosDiv.innerHTML = `
-                <div class='mensaje'>
-                    Usuario no ha sido creado.<br>
-                    Por favor solicítelo al correo info@inveasyble.com
-                </div>`;
-            return;
-        }
+    resultadosDiv.innerHTML = html;
 
-        // 🟡 Usuario existe pero sin casos
-        if (!data || data.length === 0) {
-            resultadosDiv.innerHTML = `
-                <div class='mensaje'>
-                    Usuario encontrado, pero no tiene casos activos.
-                </div>`;
-            return;
-        }
-
-        // 🟢 Mostrar casos
-        let html = "";
-        data.forEach(item => {
-            html += `
-                <div class="caso">
-                    <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
-                    <div><span class="label">Doctor:</span> ${item.doctor || ""}</div>
-                    <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-                    <div><span class="label">Arco Superior:</span> ${item.arcoSuperior || ""}</div>
-                    <div><span class="label">Arco Inferior:</span> ${item.arcoInferior || ""}</div>
-                    <div><span class="label">Cantidad de alineadores:</span> ${item.cantidadAlineadores || ""}</div>
-                    <div><span class="label">Plan:</span> ${item.planes || ""}</div>
-                    <div><span class="label">Estatus:</span> ${item.estatus || ""}</div>
-                </div>
-            `;
-        });
-
-        resultadosDiv.innerHTML = html;
-
-    } catch (error) {
-        resultadosDiv.innerHTML = "<div class='mensaje'>Error al conectar con el servidor.</div>";
-        console.error(error);
-    }
+  } catch (error) {
+    resultadosDiv.innerHTML = "<div class='mensaje'>Error al conectar con el servidor.</div>";
+    console.error(error);
+  }
 }
+
 </script>
 
 </body>
 </html>
-
