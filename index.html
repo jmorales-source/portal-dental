@@ -1,68 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Clínico Dental</title>
-
 <style>
-/* ====== FONDO ANIMADO PREMIUM ====== */
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #0f2027;
-    overflow-x: hidden;
+
+    /* 🎨 FONDO CON PALETA OFICIAL */
+    background: radial-gradient(circle at 20% 30%, #f4136b, transparent 40%),
+                radial-gradient(circle at 80% 70%, #349980, transparent 40%),
+                radial-gradient(circle at 50% 60%, #4a017d, transparent 50%),
+                #0e0e1a;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    color: white;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: radial-gradient(circle at 30% 40%, #7b2ff7, transparent 40%),
-                radial-gradient(circle at 70% 60%, #00f2a9, transparent 40%),
-                radial-gradient(circle at 50% 80%, #00c6ff, transparent 40%);
-    animation: moverFondo 15s infinite alternate ease-in-out;
-    z-index: -1;
-}
-
-@keyframes moverFondo {
-    0% { transform: translate(0,0) rotate(0deg); }
-    100% { transform: translate(5%,5%) rotate(5deg); }
-}
-
-/* ====== CONTENEDOR GLASS ====== */
 .container {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.15);
+    background: #ffffff;
     width: 95%;
-    max-width: 650px;
-    padding: 40px;
-    margin-top: 60px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    max-width: 620px;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    margin-top: 50px;
+    backdrop-filter: blur(5px);
 }
 
 .logo {
     width: 100%;
     height: 180px;
     border-radius: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     background-image: url('https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/eb490604fd29990b9904b81d3148c1de2664798a/Inveasyble2.png');
     background-size: contain;
     background-position: center center;
@@ -71,215 +39,110 @@ body::before {
 
 h2 {
     text-align: center;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
+    color: #4a017d;
+    margin-bottom: 25px;
 }
 
-/* ====== INPUT PREMIUM ====== */
 input {
     width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.05);
-    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
     font-size: 15px;
     margin-bottom: 15px;
-    outline: none;
-    transition: 0.3s;
-}
-
-input:focus {
-    border: 1px solid #00f2a9;
-    box-shadow: 0 0 15px #00f2a966;
 }
 
 .ejemplo {
     font-size: 12px;
-    color: #ccc;
-    margin-bottom: 25px;
+    color: #9aa4ad;
+    margin-top: 6px;
+    margin-bottom: 20px;
+    font-style: italic;
 }
 
-/* ====== BOTON GLOW ====== */
+/* 🎨 BOTON CON GRADIENTE OFICIAL */
 button {
     width: 100%;
-    padding: 14px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 10px;
     border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    background: linear-gradient(135deg, #7b2ff7, #00c6ff);
+    background: linear-gradient(135deg, #f4136b, #4a017d, #349980);
     color: white;
-    transition: 0.4s;
-    box-shadow: 0 0 20px rgba(123,47,247,0.6);
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
 }
 
 button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(0,242,169,0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(74,1,125,0.5);
 }
 
-/* ====== TARJETAS CASOS ====== */
 .caso {
-    background: rgba(255,255,255,0.06);
-    padding: 18px;
-    border-radius: 14px;
+    background: #f4f9fb;
+    padding: 16px;
+    border-radius: 12px;
     margin-bottom: 15px;
-    border: 1px solid rgba(255,255,255,0.15);
-    transition: 0.4s;
-}
-
-.caso:hover {
-    transform: scale(1.03);
-    box-shadow: 0 15px 40px rgba(0,242,169,0.3);
+    border-left: 5px solid #f4136b;
 }
 
 .label {
     font-weight: bold;
-    color: #00f2a9;
+    color: #4a017d;
 }
 
 .mensaje {
     text-align: center;
     font-weight: 500;
+    color: #444;
     margin-top: 15px;
 }
 
-/* ====== LINKS ====== */
 .links-externos {
-    margin-top: 40px;
+    margin-top: 35px;
     text-align: center;
 }
 
 .links-externos a {
     display: block;
-    margin: 10px 0;
+    margin: 8px 0;
     text-decoration: none;
-    color: #ffffffcc;
+    color: white;
+    font-size: 14px;
     transition: 0.3s;
 }
 
 .links-externos a:hover {
-    color: #00f2a9;
+    text-decoration: underline;
+    opacity: 0.8;
 }
 
-/* ====== BOTON FLOTANTE ====== */
 .materiales-btn {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: linear-gradient(135deg, #00c6ff, #00f2a9);
-    color: #0f2027;
-    padding: 14px 20px;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #349980, #4a017d);
+    color: white;
+    padding: 12px 18px;
     border-radius: 30px;
     font-weight: bold;
     text-decoration: none;
-    box-shadow: 0 0 25px rgba(0,242,169,0.7);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     transition: 0.3s;
 }
 
 .materiales-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
-/* ====== FOOTER ====== */
 .footer {
     text-align: center;
     margin-top: auto;
     font-size: 14px;
-    color: #ffffffaa;
+    color: #fff;
     padding: 20px;
+    background: rgba(0,0,0,0.3);
+    width: 100%;
 }
 </style>
-</head>
-
-<body>
-
-<div class="container">
-    <div class="logo"></div>
-    <h2>Consulta de Casos Dentales</h2>
-
-    <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
-
-    <div class="ejemplo">
-        Ejemplo: Maria Lopez 1234 (sin tildes y espacio)
-    </div>
-
-    <button onclick="buscarCasos()">Consultar</button>
-    <div id="resultados"></div>
-</div>
-
-<div class="links-externos">
-    <a href="https://inveasyble.com/enviar-caso-nuevo/" target="_blank">📄 Formulario de Envío de Caso</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/T%C3%89RMINOS%20Y%20CONDICIONES%20INVEASYBLE.pdf" target="_blank">📜 Términos y Condiciones</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Contrato%20por%20servicios%20de%20ortodoncia%20con%20alineadores.pdf" target="_blank">📝 Contrato de Servicios</a>
-</div>
-
-<a class="materiales-btn"
-   href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Material.rar"
-   target="_blank">
-   📦 Materiales Mercadeo
-</a>
-
-<footer class="footer">
-Todos los derechos reservados | Propiedad de Inveasyble
-</footer>
-
-<script>
-const apiURL = "https://script.google.com/macros/s/AKfycbzhtXgRQG_QB5leP_Aq3Lf7XMAE-dV4PwjkseFsT3Ee3H-pKD9zfHAux6KpCb8oKKaeyw/exec";
-
-function formatearFecha(fecha) {
-    if (!fecha) return "";
-    const f = new Date(fecha);
-    return f.toLocaleDateString("es-CR");
-}
-
-async function buscarCasos() {
-    const doctorInput = document.getElementById("doctorInput").value.trim();
-    const resultadosDiv = document.getElementById("resultados");
-
-    if (doctorInput === "") {
-        resultadosDiv.innerHTML = "<div class='mensaje'>Ingrese datos correctamente.</div>";
-        return;
-    }
-
-    resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
-
-    try {
-        const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
-        const data = await response.json();
-
-        const coincidenciasExactas = data.filter(item =>
-            item.doctor === doctorInput
-        );
-
-        if (!coincidenciasExactas.length) {
-            resultadosDiv.innerHTML = "<div class='mensaje'>Ingrese datos correctamente.</div>";
-            return;
-        }
-
-        let html = "";
-        coincidenciasExactas.forEach(item => {
-            html += `
-                <div class="caso">
-                    <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
-                    <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-                    <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
-                    <div><span class="label">Plan:</span> ${item.planes || ""}</div>
-                    <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
-                </div>
-            `;
-        });
-
-        resultadosDiv.innerHTML = html;
-
-    } catch (error) {
-        resultadosDiv.innerHTML = "<div class='mensaje'>Error al conectar con el servidor.</div>";
-    }
-}
-</script>
-
-</body>
-</html>
