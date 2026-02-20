@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #349980, #4a017d, #f4136b);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +36,7 @@ body {
 }
 h2 {
     text-align: center;
-    color: #0f2027;
+    color: #4a017d;
     margin-bottom: 25px;
 }
 input {
@@ -59,25 +59,25 @@ button {
     padding: 12px;
     border-radius: 10px;
     border: none;
-    background: #2c5364;
+    background: #349980;
     color: white;
     font-size: 15px;
     cursor: pointer;
     margin-bottom: 20px;
 }
 button:hover {
-    background: #203a43;
+    background: #4a017d;
 }
 .caso {
     background: #f4f9fb;
     padding: 16px;
     border-radius: 12px;
     margin-bottom: 15px;
-    border-left: 5px solid #2c5364;
+    border-left: 5px solid #f4136b;
 }
 .label {
     font-weight: bold;
-    color: #203a43;
+    color: #4a017d;
 }
 .mensaje {
     text-align: center;
@@ -103,8 +103,8 @@ button:hover {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #00c6ff;
-    color: #0f2027;
+    background: #f4136b;
+    color: white;
     padding: 12px 18px;
     border-radius: 30px;
     font-weight: bold;
@@ -113,7 +113,7 @@ button:hover {
     transition: 0.3s;
 }
 .materiales-btn:hover {
-    background: #ffffff;
+    background: #4a017d;
 }
 .footer {
     text-align: center;
@@ -121,108 +121,10 @@ button:hover {
     font-size: 14px;
     color: #fff;
     padding: 20px;
-    background: #203a43;
+    background: #4a017d;
     width: 100%;
 }
 </style>
 </head>
 
 <body>
-
-<div class="container">
-    <div class="logo"></div>
-    <h2>Consulta de Casos Dentales</h2>
-
-    <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
-    <div class="ejemplo">
-        Ejemplo: Maria Lopez 1234 (sin tildes y espacio)
-    </div>
-
-    <button onclick="buscarCasos()">Consultar</button>
-    <div id="resultados"></div>
-</div>
-
-<div class="links-externos">
-    <a href="https://inveasyble.com/enviar-caso-nuevo/" target="_blank">📄 Formulario de Envío de Caso</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/T%C3%89RMINOS%20Y%20CONDICIONES%20INVEASYBLE.pdf" target="_blank">📜 Términos y Condiciones</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Contrato%20por%20servicios%20de%20ortodoncia%20con%20alineadores.pdf" target="_blank">📝 Contrato de Servicios</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Calculo%20de%20Alineadores.xlsx" target="_blank">📅 Calendario de Alineadores</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Paquetes.jpeg" target="_blank">📊 Ver Planes</a>
-    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Flujo%20de%20trabajo.jpeg" target="_blank">🔄 Flujo de Trabajo</a>
-</div>
-
-<a class="materiales-btn" href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Material.rar" target="_blank">
-📦 Materiales Mercadeo
-</a>
-
-<footer class="footer">
-Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Morales
-</footer>
-
-<script>
-const apiURL = "https://script.google.com/macros/s/AKfycbzhtXgRQG_QB5leP_Aq3Lf7XMAE-dV4PwjkseFsT3Ee3H-pKD9zfHAux6KpCb8oKKaeyw/exec";
-
-function formatearFecha(fecha) {
-    if (!fecha) return "";
-    const f = new Date(fecha);
-    return f.toLocaleDateString("es-CR");
-}
-
-async function buscarCasos() {
-    const doctorInput = document.getElementById("doctorInput").value.trim();
-    const resultadosDiv = document.getElementById("resultados");
-
-    if (doctorInput === "") {
-        resultadosDiv.innerHTML = "<div class='mensaje'>Ingrese datos correctamente.</div>";
-        return;
-    }
-
-    resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
-
-    try {
-        const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
-        const data = await response.json();
-
-        const coincidenciasExactas = data.filter(item => item.doctor === doctorInput);
-
-        if (!coincidenciasExactas.length) {
-            resultadosDiv.innerHTML = `
-                <div class='mensaje'>
-                Ingrese datos correctamente.<br><br>
-                Si no posee usuario, solicitar acceso al correo:<br>
-                <strong>info@inveasyble.com</strong>
-                </div>
-            `;
-            return;
-        }
-
-        let html = "";
-
-        coincidenciasExactas.forEach(item => {
-            html += `
-            <div class="caso">
-                <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
-                <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-                <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
-                <div><span class="label">Plan:</span> ${item.planes || ""}</div>
-                <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
-            </div>
-            `;
-        });
-
-        resultadosDiv.innerHTML = html;
-
-    } catch (error) {
-        resultadosDiv.innerHTML = `
-            <div class='mensaje'>
-            Error al conectar con el servidor.<br>
-            Intente nuevamente o contacte a <strong>info@inveasyble.com</strong>
-            </div>
-        `;
-        console.error(error);
-    }
-}
-</script>
-
-</body>
-</html>
