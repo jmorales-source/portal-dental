@@ -23,7 +23,7 @@ body {
   padding: 35px;
   border-radius: 18px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .hero-image {
@@ -51,15 +51,7 @@ input {
   font-size: 15px;
   margin-bottom: 15px;
 }
-.ejemplo {
-    font-size: 12px;
-    color: #9aa4ad;
-    margin-top: 6px;
-    margin-bottom: 20px;
-    padding-left: 2px;
-    font-style: italic;
-    letter-spacing: 0.3px;
-}
+
 button {
   width: 100%;
   padding: 12px;
@@ -76,25 +68,6 @@ button:hover {
   background: #203a43;
 }
 
-.caso {
-  background: #f4f9fb;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border-left: 5px solid #2c5364;
-}
-
-.label {
-  font-weight: bold;
-  color: #203a43;
-}
-
-.mensaje {
-  text-align: center;
-  font-weight: 500;
-  color: #444;
-  margin-top: 15px;
-}
 .footer {
   text-align: center;
   margin-top: auto;
@@ -104,101 +77,105 @@ button:hover {
   background: #203a43;
   width: 100%;
 }
+
+.fixed-left, .fixed-right {
+  position: fixed;
+  top: 35%;
+  width: 220px;
+}
+
+.fixed-left { left: 20px; }
+.fixed-right { right: 20px; }
+
+.fixed-left img, .fixed-right img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.material-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #2c5364;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.google-search {
+  position: fixed;
+  top: 15px;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+}
+
+.google-search input {
+  width: 300px;
+  padding: 8px;
+  border-radius: 20px;
+  border: none;
+}
 </style>
 </head>
 
 <body>
+
+<!-- GOOGLE SEARCH -->
+<div class="google-search">
+  <form action="https://www.google.com/search" method="GET" target="_blank">
+    <input type="text" name="q" placeholder="Buscar en Google...">
+  </form>
+</div>
+
+<!-- IMAGEN PLANES -->
+<div class="fixed-left">
+  <img src="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Paquetes.jpeg">
+</div>
+
+<!-- IMAGEN FLUJO -->
+<div class="fixed-right">
+  <img src="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Flujo%20de%20trabajo.jpeg">
+</div>
 
 <div class="container">
   <div class="hero-image"></div>
   <h2>Consulta de Casos Dentales</h2>
 
   <input type="text" id="doctorInput" placeholder="Ingrese su nombre completo + ID Unico">
-  <div class="ejemplo">Ejemplo: Maria Lopez 1234 (sin tildes y espacio)</div>
   <button onclick="buscarCasos()">Consultar</button>
 
   <div id="resultados"></div>
+
+  <div style="margin-top:30px; text-align:center;">
+    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/T%C3%89RMINOS%20Y%20CONDICIONES%20INVEASYBLE.pdf" target="_blank">
+      📄 Términos y Condiciones
+    </a>
+    <br><br>
+    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Contrato%20por%20servicios%20de%20ortodoncia%20con%20alineadores.pdf" target="_blank">
+      📄 Contrato de Ortodoncia
+    </a>
+    <br><br>
+    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Calculo%20de%20Alineadores.xlsx" target="_blank">
+      📅 Calendario de Alineadores
+    </a>
+  </div>
 </div>
+
+<!-- MATERIAL RAR -->
+<a class="material-btn" 
+href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Material.rar" 
+target="_blank">
+📂 Material de Mercadeo
+</a>
 
 <footer class="footer">
 Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Morales
 </footer>
 
-<script>
-
-const apiURL = "https://script.google.com/macros/s/AKfycbzhtXgRQG_QB5leP_Aq3Lf7XMAE-dV4PwjkseFsT3Ee3H-pKD9zfHAux6KpCb8oKKaeyw/exec";
-
-function formatearFecha(fecha) {
-  if (!fecha) return "";
-  const f = new Date(fecha);
-  return f.toLocaleDateString("es-CR");
-}
-
-async function buscarCasos() {
-
-  const doctorInput = document.getElementById("doctorInput").value.trim();
-  const resultadosDiv = document.getElementById("resultados");
-
-  if (doctorInput === "") {
-    resultadosDiv.innerHTML = "<div class='mensaje'>Ingrese datos correctamente.</div>";
-    return;
-  }
-
-  resultadosDiv.innerHTML = "<div class='mensaje'>Consultando...</div>";
-
-  try {
-
-    const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
-    const data = await response.json();
-
-    // FILTRADO EXACTO EN FRONTEND (extra seguridad)
-    const coincidenciasExactas = data.filter(item => 
-      item.doctor === doctorInput
-    );
-
-    if (!coincidenciasExactas || coincidenciasExactas.length === 0) {
-      resultadosDiv.innerHTML = `
-        <div class='mensaje'>
-          Ingrese datos correctamente.<br><br>
-          Si no posee usuario, solicitar acceso al correo:<br>
-          <strong>info@inveasyble.com</strong>
-        </div>
-      `;
-      return;
-    }
-
-    let html = "";
-
-    coincidenciasExactas.forEach(item => {
-      html += `
-      <div class="caso">
-        <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
-        <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-        <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
-        <div><span class="label">Plan:</span> ${item.planes || ""}</div>
-        <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
-      </div>
-      `;
-    });
-
-    resultadosDiv.innerHTML = html;
-
-  } catch (error) {
-
-    resultadosDiv.innerHTML = `
-      <div class='mensaje'>
-        Error al conectar con el servidor.<br>
-        Intente nuevamente o contacte a <strong>info@inveasyble.com</strong>
-      </div>
-    `;
-
-    console.error(error);
-  }
-}
-
-</script>
-
 </body>
 </html>
-
-
