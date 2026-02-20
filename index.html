@@ -24,7 +24,7 @@ body {
   padding: 35px;
   border-radius: 18px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .hero-image {
@@ -32,7 +32,7 @@ body {
   height: 180px;
   border-radius: 16px;
   margin-bottom: 25px;
-  background-image: url('https://github.com/jmorales-source/inveasyble-website-assets/blob/57c024c240ba15a20d54bcb97def8fffdce7ec9c/InvEasyble%20IDCorp-4%402x-8.png');
+  background-image: url('https://github.com/jmorales-source/inveasyble-website-assets/blob/main/INVEASYBLE%20(1).png?raw=true');
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -69,65 +69,21 @@ button:hover {
   background: #203a43;
 }
 
-/* GOOGLE BOX IZQUIERDA */
-.google-box {
-  position: fixed;
-  top: 100px;
-  left: 20px;
-  width: 250px;
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+/* SECCIÓN LINKS CENTRALES */
+.center-links {
   text-align: center;
+  margin-top: 25px;
 }
 
-.google-box img {
-  width: 120px;
-  margin-bottom: 10px;
-}
-
-.google-box input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-}
-
-.google-box button {
-  width: 100%;
-  padding: 8px;
-  border-radius: 20px;
-  border: none;
-  background: #4285F4;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.google-box button:hover {
-  background: #3367d6;
-}
-
-/* LINKS LATERALES */
-.side-links {
-  position: fixed;
-  left: 20px;
-  top: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.side-links a {
-  color: white;
+.center-links a {
+  display: block;
+  margin: 10px 0;
   text-decoration: none;
   font-weight: 500;
-  font-size: 15px;
+  color: #2c5364;
 }
 
-.side-links a:hover {
+.center-links a:hover {
   text-decoration: underline;
 }
 
@@ -149,23 +105,6 @@ button:hover {
   background: #203a43;
 }
 
-/* LINKS INFERIORES */
-.footer-links {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.footer-links a {
-  color: #203a43;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
 /* FOOTER */
 .footer {
   text-align: center;
@@ -181,27 +120,6 @@ button:hover {
 
 <body>
 
-<!-- GOOGLE -->
-<div class="google-box">
-  <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-  <form action="https://www.google.com/search" method="GET" target="_blank">
-    <input type="text" name="q" placeholder="Buscar en Google...">
-    <button type="submit">Buscar</button>
-  </form>
-</div>
-
-<!-- MENÚ IZQUIERDO -->
-<div class="side-links">
-  <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Paquetes.jpeg" target="_blank">
-    📦 Ver Planes de Tratamiento
-  </a>
-
-  <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Flujo%20de%20trabajo.jpeg" target="_blank">
-    🔄 Ver Flujo de Trabajo
-  </a>
-</div>
-
-<!-- CONTENIDO CENTRAL -->
 <div class="container">
   <div class="hero-image"></div>
   <h2>Consulta de Casos Dentales</h2>
@@ -211,18 +129,33 @@ button:hover {
 
   <div id="resultados"></div>
 
-  <div class="footer-links">
+  <!-- LINKS CENTRADOS -->
+  <div class="center-links">
+
+    <a href="https://inveasyble.com/enviar-caso-nuevo/" target="_blank">
+      📝 Formulario de Envío de Caso
+    </a>
+
+    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Paquetes.jpeg" target="_blank">
+      📦 Ver Planes de Tratamiento
+    </a>
+
+    <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Flujo%20de%20trabajo.jpeg" target="_blank">
+      🔄 Ver Flujo de Trabajo
+    </a>
+
     <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/T%C3%89RMINOS%20Y%20CONDICIONES%20INVEASYBLE.pdf" target="_blank">
-      Términos y Condiciones
+      📄 Términos y Condiciones
     </a>
 
     <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Contrato%20por%20servicios%20de%20ortodoncia%20con%20alineadores.pdf" target="_blank">
-      Contrato
+      📄 Contrato
     </a>
 
     <a href="https://raw.githubusercontent.com/jmorales-source/inveasyble-website-assets/72232886313b7c8e29be92cb21a3eb346c4ddb6b/Calculo%20de%20Alineadores.xlsx" target="_blank">
-      Calendario
+      📅 Calendario de Alineadores
     </a>
+
   </div>
 </div>
 
@@ -239,4 +172,3 @@ Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Mora
 
 </body>
 </html>
-
