@@ -162,7 +162,7 @@ Todos los derechos reservados | Propiedad de Inveasyble | Created by Joseph Mora
 
 <script>
 
-const apiURL = "https://script.google.com/a/macros/inveasyble.com/s/AKfycbw_Q49WGEIxKzcK1b0a0D4MQ11ydkP490yFVQnGYNzmZtYwrHVgqC691rxDk8GRapM1/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycbwTuOo8CclA2cp8D4_1PKBjAbEJ17HqiYrzkCR0PALIoLRIeBElYw1amwO1-AQ9D6Sp/exec";
 
 let casosGuardados = [];
 
@@ -186,10 +186,16 @@ async function buscarCasos() {
 
   try {
 
-    const response = await fetch(`${apiURL}?doctor=${encodeURIComponent(doctorInput)}`);
+    const response = await fetch(apiURL, {
+      method: "POST",
+      body: new URLSearchParams({
+        doctor: doctorInput
+      })
+    });
+
     const data = await response.json();
 
-    if (!data.length) {
+    if (!data.data || !data.data.length) {
       resultadosDiv.innerHTML = `
         <div class='mensaje'>
           Ingrese datos correctamente.<br><br>
@@ -200,7 +206,7 @@ async function buscarCasos() {
       return;
     }
 
-    casosGuardados = data;
+    casosGuardados = data.data;
 
     resultadosDiv.innerHTML = `
       <input type="text"
@@ -236,9 +242,9 @@ function mostrarCasos(lista) {
       <div class="caso">
         <div><span class="label">Paciente:</span> ${item.paciente || ""}</div>
         <div><span class="label">Fecha de entrega:</span> ${formatearFecha(item.fechaEntrega)}</div>
-        <div><span class="label">Cantidad de alineadores U/L:</span> ${item.cantidadAlineadores || ""}</div>
-        <div><span class="label">Plan:</span> ${item.planes || ""}</div>
-        <div><span class="label">Estatus del caso:</span> ${item.estatus || ""}</div>
+        <div><span class="label">Cantidad de alineadores U/L:</span> ${item.ul || ""}</div>
+        <div><span class="label">Plan:</span> ${item.paquete || ""}</div>
+        <div><span class="label">Estatus del caso:</span> ${item.estado || ""}</div>
       </div>
     `;
   });
@@ -261,11 +267,3 @@ function filtrarPacientes() {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
