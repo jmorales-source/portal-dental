@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Plan de Tratamiento</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+padding:30px;
+}
+
+.container{
+background:white;
+padding:20px;
+width:900px;
+margin:auto;
+border:1px solid #ccc;
+}
+
+input{
+width:100%;
+padding:6px;
+margin-bottom:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns: repeat(16,1fr);
+gap:3px;
+margin-top:20px;
+}
+
+.cell{
+border:1px solid #ccc;
+height:35px;
+}
+
+.white select{
+width:100%;
+height:100%;
+border:none;
+}
+
+.purple{
+background:#b77492;
+}
+
+.purple select{
+width:100%;
+height:100%;
+border:none;
+background:#b77492;
+color:white;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container" id="pdfArea">
+
+<h2>INVEASYBLE - INSTRUCCIONES</h2>
+
+<label>PACIENTE</label>
+<input id="paciente">
+
+<label>DOCTOR</label>
+<input id="doctor">
+
+<h3>DIAGRAMA</h3>
+
+<div class="grid" id="grid"></div>
+
+</div>
+
+<center>
+<button onclick="descargarPDF()">Descargar PDF</button>
+</center>
+
+<script>
+
+let grid = document.getElementById("grid")
+
+for(let i=0;i<64;i++){
+
+let div = document.createElement("div")
+
+if(i%2==0){
+
+div.className="cell white"
+
+div.innerHTML=`
+<select>
+<option value=""></option>
+<option>Atache</option>
+<option>Botón</option>
+<option>Gancho</option>
+<option>Plano</option>
+<option>Presión</option>
+</select>
+`
+
+}else{
+
+div.className="cell purple"
+
+div.innerHTML=`
+<select>
+<option></option>
+<option>0.1</option>
+<option>0.2</option>
+<option>0.3</option>
+<option>0.4</option>
+<option>0.5</option>
+</select>
+`
+
+}
+
+grid.appendChild(div)
+
+}
+
+function descargarPDF(){
+
+var element=document.getElementById("pdfArea")
+
+html2pdf().from(element).save("plan_tratamiento.pdf")
+
+setTimeout(()=>{
+
+document.getElementById("paciente").value=""
+document.getElementById("doctor").value=""
+
+document.querySelectorAll("select").forEach(s=>s.selectedIndex=0)
+
+},1000)
+
+}
+
+</script>
+
+</body>
+</html>
